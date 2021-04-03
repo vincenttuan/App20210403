@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     fun onClickSubmitButton(view: View) {
         val guess = "1234"
         val result = ab.getResult(guess)
-        Log.d("MainActivity", Arrays.toString(result))
+        Log.d(TAG, Arrays.toString(result))
     }
 
 }
