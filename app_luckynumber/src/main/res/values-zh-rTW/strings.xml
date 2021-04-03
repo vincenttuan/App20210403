@@ -7,4 +7,5 @@
     <string name="too_big">猜太大了</string>
     <string name="too_small">猜太小了</string>
     <string name="bingo">猜對了</string>
+    <string name="ok">確定</string>
 </resources>
