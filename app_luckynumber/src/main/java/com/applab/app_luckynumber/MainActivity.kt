@@ -1,5 +1,6 @@
 package com.applab.app_luckynumber
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -45,11 +46,22 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(R.string.title)
                 .setMessage(R.string.bingo)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.replay, listener)
+                //.setNeutralButton(R.string.cancel, null)
+                .setNegativeButton(R.string.exit, listener)
                 .show()
-            // 重新產生 LuckyNumber 物件
-            luckyNumber = LuckyNumber()
-            //finish() // Activity運行結束
+        }
+    }
+    // 實作一個 AlertDialog 的 onClick 監聽器
+    val listener = DialogInterface.OnClickListener { dialog, which ->
+        when(which) {
+            DialogInterface.BUTTON_POSITIVE -> {
+                // 重新產生 LuckyNumber 物件
+                luckyNumber = LuckyNumber()
+            }
+            DialogInterface.BUTTON_NEGATIVE -> {
+                finish() // Activity運行結束
+            }
         }
     }
 }

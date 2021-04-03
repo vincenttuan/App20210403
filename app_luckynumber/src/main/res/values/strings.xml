@@ -7,4 +7,7 @@
     <string name="too_small">Too small</string>
     <string name="bingo">Bingo</string>
     <string name="ok">OK</string>
+    <string name="replay">Replay</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
 </resources>
