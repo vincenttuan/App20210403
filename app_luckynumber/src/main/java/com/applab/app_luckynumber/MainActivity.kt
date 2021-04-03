@@ -3,6 +3,7 @@ package com.applab.app_luckynumber
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -12,18 +13,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var luckyNumber = LuckyNumber()
+    private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d(TAG, "ans: ${luckyNumber.ans.toString()}")
     }
 
     // 按下 submit button 後所要執行的邏輯
     fun onClickSubmitButton(view: View) {
         val guess = inputNumber.text.toString().toInt()
+        Log.d(TAG, "guess: ${guess.toString()}")
         //val ans = luckyNumber.ans
         val result = luckyNumber.validate(guess)
+        Log.d(TAG, "result: ${result.toString()}")
         if(result > 0) {
             // 通知 Toast
             Toast.makeText(this, R.string.too_big, Toast.LENGTH_SHORT).show()
