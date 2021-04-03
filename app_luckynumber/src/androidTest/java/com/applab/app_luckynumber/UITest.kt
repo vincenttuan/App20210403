@@ -45,6 +45,7 @@ class UITest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click())
+                break
             }
 
             // 停一秒鐘
