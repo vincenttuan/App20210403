@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">App_ABNumber</string>
+    <string name="title">4 digits Number</string>
+    <string name="input_message">Input a number</string>
+    <string name="button_submit">Submit</string>
+    <string name="result">Result</string>
+    <string name="bingo">Bingo</string>
+    <string name="ok">OK</string>
+    <string name="replay">Replay</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
 </resources>
