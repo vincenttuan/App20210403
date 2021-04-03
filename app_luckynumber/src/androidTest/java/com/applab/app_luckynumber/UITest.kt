@@ -14,6 +14,7 @@ import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.lang.Exception
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class UITest {
@@ -34,10 +35,18 @@ class UITest {
             // 按下 Submit button
             onView(ViewMatchers.withId(R.id.submitButton)).perform(click())
             // 按下 Dialog 上的確定
-            onView(withText(R.string.ok))
-                .inRoot(isDialog())
-                .check(matches(isDisplayed()))
-                .perform(click())
+            try {
+                onView(withText(R.string.ok))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click())
+            } catch (e: Exception) {
+                onView(withText(R.string.exit))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click())
+            }
+
             // 停一秒鐘
             Thread.sleep(1000)
         }
