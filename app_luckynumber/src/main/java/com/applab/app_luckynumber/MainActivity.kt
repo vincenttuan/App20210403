@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(R.string.title)
                 .setMessage(R.string.too_big)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.ok, listener2)
                 .show()
 
         } else if(result < 0) {
@@ -39,8 +39,9 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(R.string.title)
                 .setMessage(R.string.too_small)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.ok, listener2)
                 .show()
+
         } else {
             Toast.makeText(this, R.string.bingo, Toast.LENGTH_SHORT).show()
             AlertDialog.Builder(this)
@@ -64,4 +65,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    val listener2 = DialogInterface.OnClickListener { dialog, which ->
+        inputNumber.selectAll()
+    }
+
 }
