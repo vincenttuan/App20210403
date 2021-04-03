@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val log = "${result[0]} A ${result[1]} B"
         // log 資料累積
         resultLog.text = "$guess -> $log \n${resultLog.text.toString()}"
-
+        inputNumber.selectAll()
         if(result[0] == 4) {
             AlertDialog.Builder(this)
                 .setTitle(R.string.result)
@@ -35,13 +35,8 @@ class MainActivity : AppCompatActivity() {
                 .setPositiveButton(R.string.replay, listener)
                 .setNegativeButton(R.string.exit, listener)
                 .show()
-        } else {
-            AlertDialog.Builder(this)
-                .setTitle(R.string.result)
-                .setMessage(log)
-                .setPositiveButton(R.string.ok, listener2)
-                .show()
         }
+
     }
 
     val listener = DialogInterface.OnClickListener { dialog, which ->
@@ -57,7 +52,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    val listener2 = DialogInterface.OnClickListener { dialog, which ->
-        inputNumber.selectAll()
-    }
 }
