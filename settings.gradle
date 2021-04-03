@@ -1,0 +1,3 @@
+include ':app_luckynumber'
+include ':app'
+rootProject.name = "MyBMIApp"
