@@ -3,6 +3,7 @@ package com.applab.app_luckyindex
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_result.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ResultActivity : AppCompatActivity() {
@@ -16,6 +17,8 @@ class ResultActivity : AppCompatActivity() {
         // 將 luckyIndex 放到 View元件(text_result)中
         text_result.text = luckyIndex.toString()
         // 將現在時間放到 View元件(text_time)中
-        text_time.text = Date().toString()
+        // 時間格式轉換
+        val time = SimpleDateFormat("HH : mm : ss", Locale.TAIWAN)
+        text_time.text = time.format(Date())
     }
 }
