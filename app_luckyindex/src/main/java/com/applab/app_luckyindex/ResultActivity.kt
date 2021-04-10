@@ -10,6 +10,7 @@ import java.util.*
 class ResultActivity : AppCompatActivity() {
     val result_code = 101
     var luckyIndex = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
