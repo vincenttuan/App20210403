@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App_Exchange</string>
+    <string name="app_title">Please enter TWD</string>
+    <string name="app_hint">10000</string>
+    <string name="app_submit">Exchange</string>
+    <string name="app_result_title">Exchange</string>
 </resources>
