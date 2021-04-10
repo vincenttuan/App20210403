@@ -20,9 +20,10 @@ class ExchangeActivity : AppCompatActivity() {
             // 子執行緒環境中才能執行網路程式
             // YahooFinance API 是一種網路程式
             val usd = getUSDByTWD(amount)
-            // UI 執行緒環境
+
             // 變更 UI View 元件內容, 必須要在 UI 執行緒環境下
             runOnUiThread(Runnable {
+                // UI 執行緒環境
                 result_amount.text = "%.2f".format(usd)
                 val time = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.TAIWAN)
                 result_time.text = time.format(Date())
