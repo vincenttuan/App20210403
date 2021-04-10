@@ -31,6 +31,7 @@ class ExchangeActivity : AppCompatActivity() {
 
         }).start()
 
+
     }
 
     fun onClick(view: View) {
