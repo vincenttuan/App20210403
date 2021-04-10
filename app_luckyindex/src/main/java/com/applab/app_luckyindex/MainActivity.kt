@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : ComponentActivity() {
@@ -32,9 +33,11 @@ class MainActivity : ComponentActivity() {
     private val openResultActivityCustom =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == 101) {
-                Toast.makeText(context,
-                               result.data?.getStringExtra("luckyIndex").toString(),
-                               Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(context)
+                    .setTitle(R.string.app_result_title)
+                    .setMessage(result.data?.getStringExtra("luckyIndex").toString())
+                    .setPositiveButton("OK", null)
+                    .show()
             }
         }
 
