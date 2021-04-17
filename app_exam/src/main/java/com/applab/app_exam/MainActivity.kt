@@ -2,6 +2,7 @@ package com.applab.app_exam
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +10,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -25,7 +28,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var context: Context
     // 建立 users 資料集合
     // 其結果會放在 listview 物件中
-    val users = mutableListOf(User("John", 100), User("Mary", 90))
+    val users = mutableListOf(
+        User("John", 100),
+        User("Mary", 90),
+        User("Jo", 45),
+        User("Helen", 80),
+        User("Tom", 55)
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +64,29 @@ class MainActivity : AppCompatActivity() {
                 val score = v.findViewById<View>(R.id.text2) as TextView
                 name.text = getItem(position)?.name
                 score.text = getItem(position)?.score.toString()
+                if(getItem(position)?.score!! < 60) {
+                    score.setTextColor(Color.RED)
+                }
                 return v
             }
         }
         // listView 配置適配器
         list_view.adapter = adapter
+
+        // listView onItemClick 監聽
+        list_view.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val user = parent?.getItemAtPosition(position)
+                Toast.makeText(context, user.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+        // listView onItemLongClick 監聽
+        list_view.onItemLongClickListener =
+            AdapterView.OnItemLongClickListener { parent, view, position, id ->
+                val user = parent?.getItemAtPosition(position)
+                Toast.makeText(context, "Long click : " + user.toString(), Toast.LENGTH_SHORT).show()
+                false
+            }
 
     }
 
