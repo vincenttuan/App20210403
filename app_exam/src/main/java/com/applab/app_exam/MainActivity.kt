@@ -46,13 +46,13 @@ class MainActivity : AppCompatActivity() {
         // listView 的適配器
         val adapter = object : ArrayAdapter<User?>(
             context,
-            android.R.layout.simple_list_item_2,
-            android.R.id.text1,
+            R.layout.item_main, //android.R.layout.simple_list_item_2,
+            R.id.text1,
             users as List<User?>) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val v = super.getView(position, convertView, parent)
-                val name = v.findViewById<View>(android.R.id.text1) as TextView
-                val score = v.findViewById<View>(android.R.id.text2) as TextView
+                val name = v.findViewById<View>(R.id.text1) as TextView
+                val score = v.findViewById<View>(R.id.text2) as TextView
                 name.text = getItem(position)?.name
                 score.text = getItem(position)?.score.toString()
                 return v
