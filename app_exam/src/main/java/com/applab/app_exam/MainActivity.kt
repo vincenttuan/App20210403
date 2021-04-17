@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 // User data class 包含學生姓名, 考試分數
-data class User(val name: String, val score: Int)
+data class User(val name: String, val score: Int) : java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
     lateinit var context: Context
@@ -79,7 +79,11 @@ class MainActivity : AppCompatActivity() {
         list_view.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val user = parent?.getItemAtPosition(position)
-                Toast.makeText(context, user.toString(), Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, AddActivity::class.java)
+                intent.putExtra("user", user as User)
+                intent.putExtra("position", position)
+                // 轉跳 Activity
+                openResultActivityCustom.launch(intent)
             }
 
         // listView onItemLongClick 監聽
@@ -103,7 +107,15 @@ class MainActivity : AppCompatActivity() {
                 users.add(user)
                 // 重整 adapter
                 (list_view.adapter as ArrayAdapter<User>).notifyDataSetChanged()
-
+            } else if(result.resultCode == 102) {
+                val name = result.data?.getStringExtra("name").toString()
+                val score = result.data?.getStringExtra("score").toString().toInt()
+                val position = result.data?.getIntExtra("position", -1).toString().toInt()
+                if(position != -1) {
+                    val user = User(name, score)
+                    users.set(position, user)
+                    (list_view.adapter as ArrayAdapter<User>).notifyDataSetChanged()
+                }
             }
         }
 

@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/button"
         android:text="Add"
         android:textSize="30dp"
         android:onClick="onClick"
