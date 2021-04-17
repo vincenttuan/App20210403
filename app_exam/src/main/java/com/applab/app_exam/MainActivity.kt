@@ -26,6 +26,7 @@ data class User(val name: String, val score: Int)
 
 class MainActivity : AppCompatActivity() {
     lateinit var context: Context
+
     // 建立 users 資料集合
     // 其結果會放在 listview 物件中
     val users = mutableListOf(
@@ -84,8 +85,10 @@ class MainActivity : AppCompatActivity() {
         list_view.onItemLongClickListener =
             AdapterView.OnItemLongClickListener { parent, view, position, id ->
                 val user = parent?.getItemAtPosition(position)
-                Toast.makeText(context, "Long click : " + user.toString(), Toast.LENGTH_SHORT).show()
-                false
+                Toast.makeText(context, "delete : " + user.toString(), Toast.LENGTH_SHORT).show()
+                adapter.remove(user as User)
+                list_view.adapter = adapter
+                true
             }
 
     }
