@@ -8,15 +8,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar;
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
+// User data class 包含學生姓名, 考試分數
+data class User(val name: String, val score: Int)
 
 class MainActivity : AppCompatActivity() {
     lateinit var context: Context
+    // 建立 users 資料集合
+    // 其結果會放在 listview 物件中
+    val users = mutableListOf(User("John", 100), User("Mary", 90))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,6 +42,25 @@ class MainActivity : AppCompatActivity() {
             openResultActivityCustom.launch(intent)
 
         }
+
+        // listView 的適配器
+        val adapter = object : ArrayAdapter<User?>(
+            context,
+            android.R.layout.simple_list_item_2,
+            android.R.id.text1,
+            users as List<User?>) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val v = super.getView(position, convertView, parent)
+                val name = v.findViewById<View>(android.R.id.text1) as TextView
+                val score = v.findViewById<View>(android.R.id.text2) as TextView
+                name.text = getItem(position)?.name
+                score.text = getItem(position)?.score.toString()
+                return v
+            }
+        }
+        // listView 配置適配器
+        list_view.adapter = adapter
+
     }
 
     private val openResultActivityCustom =
