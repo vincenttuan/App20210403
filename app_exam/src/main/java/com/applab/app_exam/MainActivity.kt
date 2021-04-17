@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 val user = parent?.getItemAtPosition(position)
                 Toast.makeText(context, "delete : " + user.toString(), Toast.LENGTH_SHORT).show()
                 adapter.remove(user as User)
-                list_view.adapter = adapter
+                list_view.adapter = adapter // 重新配置 adapter
                 true
             }
 
