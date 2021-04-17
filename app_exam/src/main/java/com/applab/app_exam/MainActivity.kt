@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 return v
             }
         }
+
         // listView 配置適配器
         list_view.adapter = adapter
 
@@ -96,6 +97,12 @@ class MainActivity : AppCompatActivity() {
     private val openResultActivityCustom =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == 101) {
+                val name = result.data?.getStringExtra("name").toString()
+                val score = result.data?.getStringExtra("score").toString().toInt()
+                val user = User(name, score)
+                users.add(user)
+                // 重整 adapter
+                (list_view.adapter as ArrayAdapter<User>).notifyDataSetChanged()
 
             }
         }
