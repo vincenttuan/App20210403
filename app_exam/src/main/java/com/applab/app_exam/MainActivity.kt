@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             //        .setAction("Action", null).show()
             val intent = Intent(context, AddActivity::class.java)
             // 轉跳 Activity
-            startActivity(intent)
+            openResultActivityCustom.launch(intent)
 
         }
     }
