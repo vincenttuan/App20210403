@@ -46,6 +46,7 @@
             android:id="@+id/et_score"
             android:hint="Input your score"
             android:textSize="30dp"
+            android:inputType="numberSigned"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
