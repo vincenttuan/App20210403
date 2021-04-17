@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val openResultActivityCustom =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        (this as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == 101) {
 
             }
