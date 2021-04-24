@@ -1,15 +1,13 @@
 package com.applab.app_food
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item.view.*
@@ -21,24 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         context = this
-
-//        val food = Food("m41370", "地中海辣鷄黑堡", 100, true, false)
-//
-//        val imageId = resources.getIdentifier(food.idName, "drawable", packageName)
-//        image_food.setImageResource(imageId)
-//
-//        text_name.text = food.name
-//        text_price.text = food.price.toString()
-//        if(food.spicy) {
-//            image_spicy.setImageResource(R.drawable.isspicy)
-//        } else {
-//            image_spicy.setImageResource(android.R.color.transparent)
-//        }
-//        if(food.new) {
-//            image_new.setImageResource(R.drawable.isnew)
-//        } else {
-//            image_new.setImageResource(android.R.color.transparent)
-//        }
 
         service()
     }
@@ -85,6 +65,28 @@ class MainActivity : AppCompatActivity() {
         }
         // 4. 配置 adpater 給 gird_view
         grid_view.adapter = adapter
+
+        // grid_view onItemClick 監聽
+        grid_view.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val food = parent?.getItemAtPosition(position) as Food
+                //Toast.makeText(context, food.toString(), Toast.LENGTH_SHORT).show()
+                val imageId = resources.getIdentifier(food.idName, "drawable", packageName)
+                image_food.setImageResource(imageId)
+
+                text_name.text = food.name
+                text_price.text = food.price.toString()
+                if(food.spicy) {
+                    image_spicy.setImageResource(R.drawable.isspicy)
+                } else {
+                    image_spicy.setImageResource(android.R.color.transparent)
+                }
+                if(food.new) {
+                    image_new.setImageResource(R.drawable.isnew)
+                } else {
+                    image_new.setImageResource(android.R.color.transparent)
+                }
+            }
     }
 
 }
