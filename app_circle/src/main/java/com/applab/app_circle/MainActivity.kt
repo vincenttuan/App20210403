@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,4 +25,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private val openResultActivityCustom = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        result -> {
+
+        }
+    }
+
+
 }

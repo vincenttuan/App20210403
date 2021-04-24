@@ -13,6 +13,7 @@ class EarthActivity : AppCompatActivity() {
             val r = edit_r.text.toString().toInt()
             intent.putExtra("r", r)
             setResult(101, intent)
+            finish()
         }
     }
 }
