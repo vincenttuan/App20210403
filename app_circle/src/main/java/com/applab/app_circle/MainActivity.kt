@@ -28,7 +28,11 @@ class MainActivity : AppCompatActivity() {
 
     private val openResultActivityCustom = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         result -> {
+            if(result.resultCode == 101) {
 
+            } else if(result.resultCode == 201) {
+
+            }
         }
     }
 

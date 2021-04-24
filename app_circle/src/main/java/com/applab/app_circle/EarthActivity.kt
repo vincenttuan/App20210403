@@ -12,7 +12,7 @@ class EarthActivity : AppCompatActivity() {
         btn_submit.setOnClickListener {
             val r = edit_r.text.toString().toInt()
             intent.putExtra("r", r)
-            setResult(101, intent)
+            setResult(201, intent)
             finish()
         }
     }
