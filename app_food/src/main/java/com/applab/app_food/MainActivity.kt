@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item.view.*
 import kotlinx.android.synthetic.main.title.*
 
 class MainActivity : AppCompatActivity() {
@@ -60,13 +61,25 @@ class MainActivity : AppCompatActivity() {
                 // v 這裡指的就是 R.layout.item 所配置的物件
                 val v = super.getView(position, convertView, parent)
                 val food = getItem(position) // 得到 food 物件資料
-                val textName = v.findViewById<View>(R.id.text_name) as TextView
-                val textPrice = v.findViewById<View>(R.id.text_price) as TextView
-                val imageFood = v.findViewById<View>(R.id.image_food) as ImageView
+                val textName = v.text_name
+                val textPrice = v.text_price
+                val imageFood = v.image_food
+                val imageSpicy = v.image_spicy
+                val imageNew = v.image_new
                 val imageFoodId = resources.getIdentifier(food?.idName, "drawable", packageName)
                 textName.text = food?.name
                 textPrice.text = food?.price.toString()
                 imageFood.setImageResource(imageFoodId)
+                if(food!!.spicy) {
+                    imageSpicy.setImageResource(R.drawable.isspicy)
+                } else {
+                    imageSpicy.setImageResource(android.R.color.transparent)
+                }
+                if(food!!.new) {
+                    imageNew.setImageResource(R.drawable.isnew)
+                } else {
+                    imageNew.setImageResource(android.R.color.transparent)
+                }
                 return v
             }
         }
