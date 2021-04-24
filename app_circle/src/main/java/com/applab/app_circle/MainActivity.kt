@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
             if (result.resultCode == 101) {
                 val r = result.data?.getIntExtra("r", 0)
                 val result = r!!.toDouble().pow(2.0) * Math.PI
-                text_result.text = result.toString()
+                text_result.text = String.format("%,.2f", result)
             } else if (result.resultCode == 201) {
                 val r = result.data?.getIntExtra("r", 0)
                 val result = r!!.toDouble().pow(3.0) * Math.PI * 4.0/3.0
-                text_result.text = result.toString()
+                text_result.text = String.format("%,.2f", result)
             }
         }
     }
