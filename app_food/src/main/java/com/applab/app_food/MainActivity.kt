@@ -4,6 +4,11 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,7 +50,28 @@ class MainActivity : AppCompatActivity() {
         var foods = Gson().fromJson(json, Array<Food>::class.java).toList()
         Log.d("MainActivity", foods.toString())
         // 3. 建立適配器 adapter 給 gird_view 使用
+        val adapter = object : ArrayAdapter<Food>(
+            context,
+            R.layout.item,
+            R.id.text_name,
+            foods) {
 
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                // v 這裡指的就是 R.layout.item 所配置的物件
+                val v = super.getView(position, convertView, parent)
+                val food = getItem(position) // 得到 food 物件資料
+                val textName = v.findViewById<View>(R.id.text_name) as TextView
+                val textPrice = v.findViewById<View>(R.id.text_price) as TextView
+                val imageFood = v.findViewById<View>(R.id.image_food) as ImageView
+                val imageFoodId = resources.getIdentifier(food?.idName, "drawable", packageName)
+                textName.text = food?.name
+                textPrice.text = food?.price.toString()
+                imageFood.setImageResource(imageFoodId)
+                return v
+            }
+        }
+        // 4. 配置 adpater 給 gird_view
+        grid_view.adapter = adapter
     }
 
 }
