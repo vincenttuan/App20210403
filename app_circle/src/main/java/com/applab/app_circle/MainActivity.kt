@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     lateinit var context: Context
@@ -27,11 +28,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val openResultActivityCustom = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        result -> {
-            if(result.resultCode == 101) {
-
-            } else if(result.resultCode == 201) {
-
+        result ->
+        run {
+            if (result.resultCode == 101) {
+                val r = result.data?.getIntExtra("r", 0)
+                val result = r!!.toDouble().pow(2.0) * Math.PI
+                text_result.text = result.toString()
+            } else if (result.resultCode == 201) {
+                val r = result.data?.getIntExtra("r", 0)
+                val result = r!!.toDouble().pow(3.0) * Math.PI * 4.0/3.0
+                text_result.text = result.toString()
             }
         }
     }
