@@ -18,12 +18,14 @@ class MainActivity : AppCompatActivity() {
 
         btn_circle.setOnClickListener {
             val intent = Intent(context, CircleActivity::class.java)
-            startActivity(intent)
+            //startActivity(intent)
+            openResultActivityCustom.launch(intent)
         }
 
         btn_earth.setOnClickListener {
             val intent = Intent(context, EarthActivity::class.java)
-            startActivity(intent)
+            //startActivity(intent)
+            openResultActivityCustom.launch(intent)
         }
     }
 
