@@ -53,7 +53,7 @@
                 <TextView
                     android:id="@+id/text_name"
                     android:text="麥當勞漢堡"
-                    android:textSize="20dp"
+                    android:textSize="30dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -74,6 +74,8 @@
     <GridView
         android:numColumns="auto_fit"
         tools:listitem="@layout/item"
+        android:gravity="center"
+        android:verticalSpacing="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
