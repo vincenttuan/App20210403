@@ -10,6 +10,7 @@
     <include layout="@layout/title" />
 
     <GridView
+        android:id="@+id/gird_view"
         android:numColumns="auto_fit"
         tools:listitem="@layout/item"
         android:gravity="center"
