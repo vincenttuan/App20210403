@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".CircleActivity">
 
-    <Button
-        android:id="@+id/btn_circle"
-        android:text="圓面積"
+    <EditText
+        android:id="@+id/edit_r"
+        android:hint="請輸入圓半徑"
         android:textSize="50dp"
         android:layout_marginTop="100dp"
         android:layout_gravity="center"
@@ -17,17 +17,8 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_earth"
-        android:text="球體積"
-        android:textSize="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/text_result"
-        android:text="0.00"
+        android:id="@+id/btn_submit"
+        android:text="圓面積"
         android:textSize="50dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
