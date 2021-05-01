@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item.view.*
 
@@ -30,6 +31,9 @@ class SalesAdapter (val list: List<Map<String, Object>>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: SalesHolder, position: Int) {
         val currentItem = list[position]
         holder.region.text = position.toString() + " : " + currentItem["Region"].toString()
+        holder.region.setOnClickListener {
+            Toast.makeText(context, list[position].toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 
 
