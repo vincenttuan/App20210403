@@ -30,11 +30,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.applab.app_nav1.WelcomeFragment"
-        android:label="Welcome"
+        android:label="{username}"
         tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcomeFragment_to_homeFragment"
@@ -43,5 +44,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
     </fragment>
 </navigation>
