@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".WelcomeFragment">
+
+    <TextView
+        android:id="@+id/text_view_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi OOO"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/text_view_color"
+        android:layout_marginTop="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Red"
+        android:textColor="#FF0000"
+        android:textSize="80dp"/>
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_marginTop="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+</LinearLayout>

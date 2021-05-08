@@ -5,15 +5,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
-
+class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        button_confirm.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
+        button_back.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
             findNavController().navigate(action)
         }
     }
