@@ -3,13 +3,12 @@ package com.applab.app_nav1
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +35,9 @@ class MainActivity : AppCompatActivity() {
 
         // 底部 Bottom menu 的配置
         bottom_nav.setupWithNavController(navController)
+
+        // Drawer menu 的配置
+        nav_view.setupWithNavController(navController)
     }
 
     // 實現 <- 的作用
@@ -43,5 +45,9 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         //return navController.navigateUp() || super.onSupportNavigateUp()
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 }
