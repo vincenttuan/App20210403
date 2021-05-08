@@ -1,5 +1,6 @@
 package com.applab.app_nav1
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         // 手動加入 action bar
+        toolbar.setTitleTextColor(Color.WHITE)
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
