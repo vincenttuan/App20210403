@@ -54,6 +54,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_info) {
+            // 具有動畫效果的 menu
+            val action = NavGraphDirections.actionGlobalInfoFragment()
+            navController.navigate(action)
+            return true
+        }
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 }

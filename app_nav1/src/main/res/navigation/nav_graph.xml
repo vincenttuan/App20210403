@@ -66,4 +66,11 @@
         android:name="com.applab.app_nav1.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <action
+        android:id="@+id/action_global_infoFragment"
+        app:destination="@id/infoFragment"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@anim/slide_out_bottom"
+        app:popEnterAnim="@anim/slide_in_bottom"
+        app:popExitAnim="@anim/slide_out_top" />
 </navigation>
