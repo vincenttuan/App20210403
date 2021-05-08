@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         // Bottom bar 切換時會變顏色
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment)
+            setOf(R.id.homeFragment, R.id.searchFragment),
+            drawer_layout // 加入 drawer 要設定
         )
 
         // 手動加入 action bar
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     // 實現 <- 的作用
     // 它會自動到堆疊中找出上一頁
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        //return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
