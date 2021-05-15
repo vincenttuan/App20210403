@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.applab.app_sqlite.db.DBHelper
+import com.applab.app_sqlite.models.Student
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val dbHelper = DBHelper(this)
@@ -24,6 +26,12 @@ class MainActivity : AppCompatActivity() {
             create()
         }
 
+        // 按下修改
+        btn_update.setOnClickListener {
+            // 修改紀錄
+            update()
+        }
+
     }
 
     // 新增紀錄
@@ -31,6 +39,17 @@ class MainActivity : AppCompatActivity() {
         val name = et_name.text.toString()
         val score = et_score.text.toString()
         dbHelper.createStudent(name, score.toInt())
+        clearFields()
+    }
+
+    // 修改紀錄
+    fun update() {
+        val id = et_id.text.toString()
+        val name = et_name.text.toString()
+        val score = et_score.text.toString()
+        val ct = Date().time
+        val student = Student(id.toInt(), name, score.toInt(), ct)
+        dbHelper.updateStudent(student)
         clearFields()
     }
 
