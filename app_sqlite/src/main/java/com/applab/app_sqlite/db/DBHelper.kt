@@ -2,10 +2,12 @@ package com.applab.app_sqlite.db
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.applab.app_sqlite.models.Student
+import java.lang.Exception
 import java.util.Date
 
 // 撰寫與資料庫建立,升級,銷毀與CRUD相關程序
@@ -82,6 +84,33 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
         val action = db.delete("Student", selection, selectionArgs)
         db.close()
         Log.d("DB", "deleteStudent: action=" + action)
+    }
+
+    // 查詢資料
+    fun readAllStudent(): List<Student> {
+        val students = ArrayList<Student>()
+        val db = readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery("select id, name, score, ct from Student", null)
+
+        } catch (e: Exception) {
+            if(cursor!!.moveToFirst()) { // 將查詢指標移動到第一筆
+                while (cursor.isAfterLast == false) { // 當查詢指標不是最後一筆時
+                    val id = cursor.getInt(cursor.getColumnIndex("id"))
+                    val name = cursor.getString(cursor.getColumnIndex("name"))
+                    val score = cursor.getInt(cursor.getColumnIndex("score"))
+                    val ct = cursor.getLong(cursor.getColumnIndex("ct"))
+                    val student = Student(
+                        id, name, score, ct
+                    )
+                    students.add(student)
+                    cursor.moveToNext()
+                }
+            }
+        }
+        db.close()
+        return students
     }
 
 }
