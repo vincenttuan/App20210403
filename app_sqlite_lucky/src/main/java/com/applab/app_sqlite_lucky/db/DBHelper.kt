@@ -17,14 +17,14 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
         val DATABASE_VERSION = 1 // 資料庫版本
         val DATABASE_NAME = "MyLuckyDB.db" // 資料庫名稱
 
-        // 建立資料表 Student 的 SQL 語句
+        // 建立資料表 Lucky 的 SQL 語句
         val SQL_CREATE_LUCKY = "" +
                 "CREATE TABLE Lucky(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "color TEXT," +
                 "num INTEGER," +
                 "ct BIGINT)"
-        // 刪除資料表 Student 的 SQL 語句
+        // 刪除資料表 Lucky 的 SQL 語句
         val SQL_DELETE_LUCKY = "DROP TABLE IF EXISTS Lucky"
 
     }
