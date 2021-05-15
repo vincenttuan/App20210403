@@ -1,10 +1,12 @@
 package com.applab.app_sqlite_lucky
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applab.app_sqlite_lucky.db.DBHelper
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,11 @@ class MainActivity : AppCompatActivity() {
         context = this
         init()
         recyclerAdapterLucky.submitList(dbHelper.readOdds())
+
+        // FAB
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+
+        }
     }
 
     private fun init() {
