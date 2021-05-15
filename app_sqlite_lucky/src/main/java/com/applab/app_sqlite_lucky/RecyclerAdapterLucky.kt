@@ -46,6 +46,7 @@ class RecyclerAdapterLucky : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when(holder) {
             is ViewHolder -> {
                 holder.bind(lucky)
+                // 按下 id 修改
                 holder.id.setOnClickListener {
                     val db = DBHelper(context)
                     val lucky = Lucky(
@@ -58,7 +59,7 @@ class RecyclerAdapterLucky : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     submitList(db.readOdds())
                     this.notifyDataSetChanged()
                 }
-
+                // 長按下 id 刪除
                 holder.id.setOnLongClickListener {
                     val db = DBHelper(context)
                     db.deleteLucky(holder.id.text.toString().toInt())
