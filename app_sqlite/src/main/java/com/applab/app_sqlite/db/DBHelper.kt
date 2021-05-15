@@ -49,7 +49,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
         values.put("ct", Date().time)
         // 新增到資料庫
         // nullColumnHack 是指若欄位是空白要放的內容為何 ?
-        // action 異動筆數(此次影響資料表的紀錄數量)
+        // action 此次新增的 id 值
         val action = db.insert("Student", null, values)
         Log.d("DB", "createStudent: action=" + action)
 
