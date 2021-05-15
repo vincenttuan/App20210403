@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.row.view.*
 import java.util.ArrayList
 
 class RecyclerAdapterLucky : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val items: List<Lucky> = ArrayList()
+    private var items: List<Lucky> = ArrayList()
 
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
         private val id: TextView = itemView.view_id
@@ -18,11 +18,15 @@ class RecyclerAdapterLucky : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val num: TextView = itemView.view_num
 
         fun bind(lucky: Lucky) {
-            id.setText(lucky.id)
+            id.setText(lucky.id.toString())
             color.setText(lucky.color)
-            num.setText(lucky.num)
+            num.setText(lucky.num.toString())
         }
 
+    }
+
+    fun submitList(list: List<Lucky>) {
+        items = list
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -35,10 +39,10 @@ class RecyclerAdapterLucky : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val currentItem = items[position]
+        val lucky = items[position]
         when(holder) {
             is ViewHolder -> {
-                holder.bind(currentItem)
+                holder.bind(lucky)
             }
         }
     }
