@@ -76,7 +76,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
     }
 
     // 刪除資料
-    fun deleteStudent(id: Int) {
+    fun deleteLucky(id: Int) {
         val db = writableDatabase
         val selection = "id LIKE ?"
         val selectionArgs = arrayOf(id.toString())
