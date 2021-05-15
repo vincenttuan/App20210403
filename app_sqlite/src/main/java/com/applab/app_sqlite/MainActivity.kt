@@ -32,6 +32,12 @@ class MainActivity : AppCompatActivity() {
             update()
         }
 
+        // 按下刪除
+        btn_delete.setOnClickListener {
+            // 刪除紀錄
+            delete()
+        }
+
     }
 
     // 新增紀錄
@@ -50,6 +56,13 @@ class MainActivity : AppCompatActivity() {
         val ct = Date().time
         val student = Student(id.toInt(), name, score.toInt(), ct)
         dbHelper.updateStudent(student)
+        clearFields()
+    }
+
+    // 刪除紀錄
+    fun delete() {
+        val id = et_id.text.toString()
+        dbHelper.deleteStudent(id.toInt())
         clearFields()
     }
 
