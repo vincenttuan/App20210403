@@ -38,6 +38,12 @@ class MainActivity : AppCompatActivity() {
             delete()
         }
 
+        // 按下查詢
+        btn_read.setOnClickListener {
+            // 查詢所有紀錄
+            readAll()
+        }
+
     }
 
     // 新增紀錄
@@ -64,6 +70,12 @@ class MainActivity : AppCompatActivity() {
         val id = et_id.text.toString()
         dbHelper.deleteStudent(id.toInt())
         clearFields()
+    }
+
+    // 查詢所有紀錄
+    fun readAll() {
+        val students = dbHelper.readAllStudent()
+        Toast.makeText(context, students.toString(), Toast.LENGTH_SHORT).show()
     }
 
     // 清除欄位資料

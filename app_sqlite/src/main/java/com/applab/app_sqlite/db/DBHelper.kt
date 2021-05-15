@@ -93,8 +93,6 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
         var cursor: Cursor? = null
         try {
             cursor = db.rawQuery("select id, name, score, ct from Student", null)
-
-        } catch (e: Exception) {
             if(cursor!!.moveToFirst()) { // 將查詢指標移動到第一筆
                 while (cursor.isAfterLast == false) { // 當查詢指標不是最後一筆時
                     val id = cursor.getInt(cursor.getColumnIndex("id"))
@@ -108,6 +106,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
                     cursor.moveToNext()
                 }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         db.close()
         return students
