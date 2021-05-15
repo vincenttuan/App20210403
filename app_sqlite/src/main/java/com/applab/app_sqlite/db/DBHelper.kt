@@ -68,6 +68,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null,
         // Where 條件
         val selection = "id LIKE ?"
         val selectionArgs = arrayOf(student.id.toString())
+        // action 是指異動筆數
         val action = db.update("Student", values, selection, selectionArgs)
         db.close()
         Log.d("DB", "updateStudent: action=" + action)
