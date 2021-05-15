@@ -16,5 +16,6 @@ class MainActivity : AppCompatActivity() {
         context = this
 
         title = dbHelper.databaseName
+        dbHelper.writableDatabase
     }
 }
