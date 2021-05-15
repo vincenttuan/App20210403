@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         // FAB
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-
+            dbHelper.createLucky("Black", 99)
+            recyclerAdapterLucky.submitList(dbHelper.readOdds())
+            recyclerAdapterLucky.notifyDataSetChanged()
         }
     }
 
