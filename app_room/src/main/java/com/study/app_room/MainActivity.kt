@@ -2,6 +2,7 @@ package com.study.app_room
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.room.Room
 import com.study.app_room.db.User
 import com.study.app_room.db.UserDatabase
@@ -24,7 +25,11 @@ class MainActivity : AppCompatActivity() {
         val user2 = User("Mary", 19, false)
 
         GlobalScope.launch {
-            db.userDao().insert(user1, user2)
+            val users = db.userDao().getAllUsers()
+            Log.d("MainActivity", users.toString())
+            if(users.size == 0) {
+                db.userDao().insert(user1, user2)
+            }
         }
 
     }
