@@ -51,11 +51,14 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
             recyclerViewAdapter.notifyDataSetChanged()
         }
 
-        // Save
+        // Save/Update
         btn_submit.setOnClickListener {
+            if(!checkUserForm()) return@setOnClickListener
+
             val name = et_name.text.toString()
             val age = et_age.text.toString().toInt()
             val working = cb_working.isChecked
+
             GlobalScope.launch {
                 if(btn_submit.text.equals("Save")) { // 新增
                     val user = User(name, age, working)
@@ -77,6 +80,16 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
 
         }
 
+    }
+
+    fun checkUserForm(): Boolean {
+        if(et_name.text.toString().isEmpty()) {
+            return false
+        }
+        if(et_age.text.toString().isEmpty()) {
+            return false
+        }
+        return true
     }
 
     fun reload() {
