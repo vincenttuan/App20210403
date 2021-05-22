@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.room.Room
 import com.study.app_room.db.User
 import com.study.app_room.db.UserDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     lateinit var db: UserDatabase
@@ -21,8 +23,9 @@ class MainActivity : AppCompatActivity() {
         val user1 = User("John", 18, true)
         val user2 = User("Mary", 19, false)
 
-        db.userDao().insert(user1, user2)
-
+        GlobalScope.launch {
+            db.userDao().insert(user1, user2)
+        }
 
     }
 }
