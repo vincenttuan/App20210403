@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             builder.setNegativeButton("Cancel", null)
+            builder.show()
         }
 
     }
