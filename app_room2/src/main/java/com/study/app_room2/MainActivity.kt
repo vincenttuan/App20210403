@@ -3,13 +3,15 @@ package com.study.app_room2
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.study.app_room2.db.User
 import com.study.app_room2.db.UserDatabase
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener {
     lateinit var db: UserDatabase
     lateinit var recyclerViewAdapter: RecyclerViewAdapter
     lateinit var context: Context
@@ -28,7 +30,19 @@ class MainActivity : AppCompatActivity() {
                     User("Mary", 19, false)
                 )
             }
-
+            // 配置 recyclerView
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(context)
+                recyclerViewAdapter = RecyclerViewAdapter(this@MainActivity)
+            }
         }
+    }
+
+    override fun onItemClickListener(user: User) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteUserClickListener(user: User) {
+        TODO("Not yet implemented")
     }
 }
