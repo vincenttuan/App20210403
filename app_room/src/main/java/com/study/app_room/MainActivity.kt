@@ -14,7 +14,7 @@ import com.github.javafaker.Faker
 import com.study.app_room.db.User
 import com.study.app_room.db.UserDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.user_form.*
+import kotlinx.android.synthetic.main.user_form.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -71,9 +71,12 @@ class MainActivity : AppCompatActivity() {
             builder.setView(dialoglayout);
             builder.setPositiveButton("Update") { dialog, which ->
                 // dialoglayout ui 的資料
-                val uid  = dialoglayout.findViewById<EditText>(R.id.et_uid).text.toString().toInt()
-                val name = dialoglayout.findViewById<EditText>(R.id.et_name).text.toString()
-                val age  = dialoglayout.findViewById<EditText>(R.id.et_age).text.toString().toInt()
+//                val uid  = dialoglayout.findViewById<EditText>(R.id.et_uid).text.toString().toInt()
+//                val name = dialoglayout.findViewById<EditText>(R.id.et_name).text.toString()
+//                val age  = dialoglayout.findViewById<EditText>(R.id.et_age).text.toString().toInt()
+                val uid  = dialoglayout.et_uid.text.toString().toInt()
+                val name = dialoglayout.et_name.text.toString()
+                val age  = dialoglayout.et_age.text.toString().toInt()
 
                 GlobalScope.launch {
                     val user = db.userDao().getUser(uid)
