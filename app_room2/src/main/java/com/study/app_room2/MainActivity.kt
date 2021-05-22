@@ -1,9 +1,11 @@
 package com.study.app_room2
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -107,6 +109,27 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
     }
 
     override fun onDeleteUserClickListener(user: User) {
-        Toast.makeText(context, "Delete: "+ user.toString(), Toast.LENGTH_SHORT).show()
+        val listener = DialogInterface.OnClickListener { dialog, which ->
+            when(which) {
+                DialogInterface.BUTTON_POSITIVE -> {
+                    GlobalScope.launch {
+                        val delUser = db.userDao().getUser(user.uid!!.toInt())
+                        if(delUser != null) {
+                            db.userDao().delete(delUser.uid!!.toInt())
+                        }
+                        reload()
+                    }
+                }
+                DialogInterface.BUTTON_NEGATIVE -> {
+
+                }
+            }
+        }
+        AlertDialog.Builder(this)
+            .setTitle("是否要刪除?")
+            .setMessage(user.toString())
+            .setPositiveButton("Delete", listener)
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }
