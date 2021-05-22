@@ -1,5 +1,6 @@
 package com.study.app_room2
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,9 @@ import kotlinx.android.synthetic.main.recyclerview_row.view.*
 
 class RecyclerViewAdapter(val listener: RowOnClickListener):
     RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+
     private var users = ArrayList<User>()
+
     fun setUsers(users: ArrayList<User>) {
         this.users = users
     }
@@ -39,15 +42,22 @@ class RecyclerViewAdapter(val listener: RowOnClickListener):
         }
     }
 
+    // 是我們建立 MyViewHolder 實體的地方
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        TODO("Not yet implemented")
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_row, null)
+        return MyViewHolder(view, listener)
     }
 
+    // 把 ViewHolder 與 data 做綁定
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val user = users[position]
+        holder.bind(user)
+        holder.itemView.setOnClickListener {
+            listener.onItemClickListener(user)
+        }
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return users.size
     }
 }
