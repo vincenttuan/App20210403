@@ -3,6 +3,8 @@ package com.study.app_room2
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.study.app_room2.db.User
@@ -23,18 +25,25 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
         db = Room.databaseBuilder(context, UserDatabase::class.java, "mydb").build()
 
         GlobalScope.launch {
-            val users = db.userDao().getAllUsers()
+            var users = db.userDao().getAllUsers()
             if (users.size == 0) {
                 db.userDao().insert(
                     User("John", 18, true),
                     User("Mary", 19, false)
                 )
+                users = db.userDao().getAllUsers()
             }
             // 配置 recyclerView
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
                 recyclerViewAdapter = RecyclerViewAdapter(this@MainActivity)
+                adapter = recyclerViewAdapter
+                // 分隔線的設置
+                val divider = DividerItemDecoration(context, VERTICAL)
+                addItemDecoration(divider)
             }
+            recyclerViewAdapter.setUsers(users as ArrayList<User>)
+            recyclerViewAdapter.notifyDataSetChanged()
         }
     }
 
