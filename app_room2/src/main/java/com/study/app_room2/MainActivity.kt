@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.Room
-import com.study.app_room.db.User
-import com.study.app_room.db.UserDatabase
+import com.study.app_room2.db.User
+import com.study.app_room2.db.UserDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

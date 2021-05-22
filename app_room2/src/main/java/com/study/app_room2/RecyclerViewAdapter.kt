@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.study.app_room.db.User
+import com.study.app_room2.db.User
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.recyclerview_row.view.*
 
