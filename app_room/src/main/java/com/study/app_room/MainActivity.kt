@@ -69,6 +69,20 @@ class MainActivity : AppCompatActivity() {
             builder.setTitle("Update")
             val dialoglayout = layoutInflater.inflate(R.layout.user_form, null)
             builder.setView(dialoglayout);
+            // 按下查詢
+            dialoglayout.btn_search.setOnClickListener {
+                val uid  = dialoglayout.et_uid.text.toString().toInt()
+                GlobalScope.launch {
+                    val user = db.userDao().getUser(uid)
+                    if(user != null) {
+                        runOnUiThread {
+                            dialoglayout.et_name.setText(user.name)
+                            dialoglayout.et_age.setText(user.age.toString())
+                        }
+                    }
+                }
+            }
+
             builder.setPositiveButton("Update") { dialog, which ->
                 // dialoglayout ui 的資料
 //                val uid  = dialoglayout.findViewById<EditText>(R.id.et_uid).text.toString().toInt()
