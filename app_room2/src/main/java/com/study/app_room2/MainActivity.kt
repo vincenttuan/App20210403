@@ -22,17 +22,19 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
         setContentView(R.layout.activity_main)
         context = this
 
-        db = Room.databaseBuilder(context, UserDatabase::class.java, "mydb").build()
+        db = Room.databaseBuilder(context, UserDatabase::class.java, "mydb")
+            .createFromAsset("databases/user.db")
+            .build()
 
         GlobalScope.launch {
             var users = db.userDao().getAllUsers()
-            if (users.size == 0) {
-                db.userDao().insert(
-                    User("John", 18, true),
-                    User("Mary", 19, false)
-                )
-                users = db.userDao().getAllUsers()
-            }
+//            if (users.size == 0) {
+//                db.userDao().insert(
+//                    User("John", 18, true),
+//                    User("Mary", 19, false)
+//                )
+//                users = db.userDao().getAllUsers()
+//            }
             // 配置 recyclerView
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
