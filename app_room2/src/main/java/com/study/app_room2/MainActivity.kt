@@ -72,8 +72,15 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
             recyclerViewAdapter.setUsers(users as ArrayList<User>)
             runOnUiThread {
                 recyclerViewAdapter.notifyDataSetChanged()
+                clear()
             }
         }
+    }
+
+    fun clear() {
+        et_name.setText("")
+        et_age.setText("")
+        cb_working.isChecked = false
     }
 
     override fun onItemClickListener(user: User) {
