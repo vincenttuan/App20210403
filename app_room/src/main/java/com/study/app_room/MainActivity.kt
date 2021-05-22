@@ -1,5 +1,7 @@
 package com.study.app_room
 
+import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,12 +19,13 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     lateinit var db: UserDatabase
+    lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        context = this
         db = Room.databaseBuilder(
-            applicationContext,
+            context,
             UserDatabase::class.java,
             "mydb"
         ).build()
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             val users = db.userDao().getAllUsers()
             Log.d("MainActivity", users.toString())
-            if(users.size == 0) {
+            if (users.size == 0) {
                 db.userDao().insert(user1, user2)
             }
         }
@@ -47,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             GlobalScope.launch {
                 db.userDao().insert(user)
             }
-            Toast.makeText(applicationContext, "Insert", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Insert", Toast.LENGTH_SHORT).show()
         }
 
         btn_query.setOnClickListener {
@@ -68,32 +71,44 @@ class MainActivity : AppCompatActivity() {
 
             GlobalScope.launch {
                 val user = db.userDao().getUser(1)
-                if(user != null) {
+                if (user != null) {
                     user.name = name
                     user.age = age
                     user.working = working
                 }
                 db.userDao().update(user)
             }
-            Toast.makeText(applicationContext, "Update", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show()
         }
 
         btn_delete.setOnClickListener {
-            val builder = AlertDialog.Builder(applicationContext)
+
+            val builder = AlertDialog.Builder(context)
             builder.setTitle("Delete")
-            val editText = EditText(applicationContext)
+            val editText = EditText(context)
             builder.setView(editText);
-            builder.setPositiveButton("Delete") {
-                dialog, which -> {
-                    GlobalScope.launch {
-                        val uid = editText.text.toString().toInt()
-                        db.userDao().delete(uid)
-                    }
+            builder.setPositiveButton("Delete") { dialog, which ->
+                val uid = editText.text.toString()
+                Toast.makeText(context, uid, Toast.LENGTH_SHORT).show()
+                GlobalScope.launch {
+                    db.userDao().delete(uid.toInt())
                 }
             }
             builder.setNegativeButton("Cancel", null)
             builder.show()
         }
 
+    }
+
+    val listener = DialogInterface.OnClickListener { dialog, which ->
+        when(which) {
+            DialogInterface.BUTTON_POSITIVE -> {
+
+            }
+            DialogInterface.BUTTON_NEGATIVE -> {
+
+
+            }
+        }
     }
 }
