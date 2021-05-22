@@ -51,11 +51,17 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
             val name = et_name.text.toString()
             val age = et_age.text.toString().toInt()
             val working = cb_working.isChecked
-            if(btn_submit.text.equals("Save")) {
-                val user = User(name, age, working)
-                db.userDao().insert(user)
-                reload()
+            GlobalScope.launch {
+                if(btn_submit.text.equals("Save")) { // 新增
+                    val user = User(name, age, working)
+                    db.userDao().insert(user)
+                    reload()
+                } else { // 修改
+
+
+                }
             }
+
         }
 
     }
