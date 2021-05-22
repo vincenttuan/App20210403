@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                         runOnUiThread {
                             dialoglayout.et_name.setText(user.name)
                             dialoglayout.et_age.setText(user.age.toString())
+                            dialoglayout.cb_working.isChecked = user.working
                         }
                     }
                 }
@@ -91,12 +92,13 @@ class MainActivity : AppCompatActivity() {
                 val uid  = dialoglayout.et_uid.text.toString().toInt()
                 val name = dialoglayout.et_name.text.toString()
                 val age  = dialoglayout.et_age.text.toString().toInt()
-
+                val working = dialoglayout.cb_working.isChecked
                 GlobalScope.launch {
                     val user = db.userDao().getUser(uid)
                     if (user != null) {
                         user.name = name
                         user.age = age
+                        user.working = working
                     }
                     db.userDao().update(user)
                 }
