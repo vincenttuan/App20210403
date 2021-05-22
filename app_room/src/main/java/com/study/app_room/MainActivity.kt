@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +14,7 @@ import com.github.javafaker.Faker
 import com.study.app_room.db.User
 import com.study.app_room.db.UserDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.user_form.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -63,7 +65,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_update.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Update")
+            val dialoglayout = layoutInflater.inflate(R.layout.user_form, null)
+            builder.setView(dialoglayout);
+            builder.setPositiveButton("Update") { dialog, which ->
+                // dialoglayout ui 的資料
+                val uid  = dialoglayout.findViewById<EditText>(R.id.et_uid).text.toString().toInt()
+                val name = dialoglayout.findViewById<EditText>(R.id.et_name).text.toString()
+                val age  = dialoglayout.findViewById<EditText>(R.id.et_age).text.toString().toInt()
 
+                GlobalScope.launch {
+                    val user = db.userDao().getUser(uid)
+                    if (user != null) {
+                        user.name = name
+                        user.age = age
+                    }
+                    db.userDao().update(user)
+                }
+            }
+            builder.setNegativeButton("Cancel", null)
+            builder.show()
 
 
 //            val faker = Faker()
@@ -103,7 +125,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     val listener = DialogInterface.OnClickListener { dialog, which ->
-        when(which) {
+        when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
 
             }
