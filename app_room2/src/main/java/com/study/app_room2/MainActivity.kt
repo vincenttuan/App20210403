@@ -3,6 +3,7 @@ package com.study.app_room2
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,8 +60,16 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
                     db.userDao().insert(user)
                     reload()
                 } else { // 修改
-
-
+                    // 從 et_name 的 tag 中取出 uid
+                    val uid = et_name.getTag().toString().toInt()
+                    val user = db.userDao().getUser(uid)
+                    if(user != null) {
+                        user.name = name
+                        user.age = age
+                        user.working = working
+                        db.userDao().update(user)
+                        reload()
+                    }
                 }
             }
 
@@ -83,13 +92,21 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
         et_name.setText("")
         et_age.setText("")
         cb_working.isChecked = false
+        btn_submit.setText("Save")
     }
 
     override fun onItemClickListener(user: User) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, "Update: " + user.toString(), Toast.LENGTH_SHORT).show()
+        et_name.setText(user.name)
+        et_age.setText(user.age.toString())
+        cb_working.isChecked = user.working
+        // 埋一個 tag 資料給修改用
+        et_name.setTag(user.uid)
+        // 修改 button 上面的字
+        btn_submit.setText("Update")
     }
 
     override fun onDeleteUserClickListener(user: User) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, "Delete: "+ user.toString(), Toast.LENGTH_SHORT).show()
     }
 }
