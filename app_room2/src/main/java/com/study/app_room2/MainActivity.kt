@@ -45,6 +45,29 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnClickListener
             recyclerViewAdapter.setUsers(users as ArrayList<User>)
             recyclerViewAdapter.notifyDataSetChanged()
         }
+
+        // Save
+        btn_submit.setOnClickListener {
+            val name = et_name.text.toString()
+            val age = et_age.text.toString().toInt()
+            val working = cb_working.isChecked
+            if(btn_submit.text.equals("Save")) {
+                val user = User(name, age, working)
+                db.userDao().insert(user)
+                reload()
+            }
+        }
+
+    }
+
+    fun reload() {
+        GlobalScope.launch {
+            var users = db.userDao().getAllUsers()
+            recyclerViewAdapter.setUsers(users as ArrayList<User>)
+            runOnUiThread {
+                recyclerViewAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onItemClickListener(user: User) {

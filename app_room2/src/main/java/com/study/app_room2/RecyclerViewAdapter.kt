@@ -43,7 +43,7 @@ class RecyclerViewAdapter(val listener: RowOnClickListener):
 
     // 是我們建立 MyViewHolder 實體的地方
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_row, null)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_row, parent, false)
         return MyViewHolder(view, listener)
     }
 
