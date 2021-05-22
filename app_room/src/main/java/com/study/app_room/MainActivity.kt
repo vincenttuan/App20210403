@@ -64,21 +64,23 @@ class MainActivity : AppCompatActivity() {
 
         btn_update.setOnClickListener {
 
-            val faker = Faker()
-            val name = faker.name().firstName()
-            val age = Random.nextInt(30)
-            val working = Random.nextInt(2) == 0
 
-            GlobalScope.launch {
-                val user = db.userDao().getUser(1)
-                if (user != null) {
-                    user.name = name
-                    user.age = age
-                    user.working = working
-                }
-                db.userDao().update(user)
-            }
-            Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show()
+
+//            val faker = Faker()
+//            val name = faker.name().firstName()
+//            val age = Random.nextInt(30)
+//            val working = Random.nextInt(2) == 0
+//
+//            GlobalScope.launch {
+//                val user = db.userDao().getUser(1)
+//                if (user != null) {
+//                    user.name = name
+//                    user.age = age
+//                    user.working = working
+//                }
+//                db.userDao().update(user)
+//            }
+//            Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show()
         }
 
         btn_delete.setOnClickListener {
