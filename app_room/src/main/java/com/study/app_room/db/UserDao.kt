@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
-@Dao
+@Dao // Data access object
 interface UserDao {
     // 查詢所有 user
     @Query("SELECT * FROM User")
