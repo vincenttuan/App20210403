@@ -3,7 +3,9 @@ package com.study.app_room
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import com.github.javafaker.Faker
 import com.study.app_room.db.User
@@ -55,6 +57,41 @@ class MainActivity : AppCompatActivity() {
                     view_result.setText(users.toString())
                 }
             }
+        }
+
+        btn_update.setOnClickListener {
+
+            val faker = Faker()
+            val name = faker.name().firstName()
+            val age = Random.nextInt(30)
+            val working = Random.nextInt(2) == 0
+
+            GlobalScope.launch {
+                val user = db.userDao().getUser(1)
+                if(user != null) {
+                    user.name = name
+                    user.age = age
+                    user.working = working
+                }
+                db.userDao().update(user)
+            }
+            Toast.makeText(applicationContext, "Update", Toast.LENGTH_SHORT).show()
+        }
+
+        btn_delete.setOnClickListener {
+            val builder = AlertDialog.Builder(applicationContext)
+            builder.setTitle("Delete")
+            val editText = EditText(applicationContext)
+            builder.setView(editText);
+            builder.setPositiveButton("Delete") {
+                dialog, which -> {
+                    GlobalScope.launch {
+                        val uid = editText.text.toString().toInt()
+                        db.userDao().delete(uid)
+                    }
+                }
+            }
+            builder.setNegativeButton("Cancel", null)
         }
 
     }
