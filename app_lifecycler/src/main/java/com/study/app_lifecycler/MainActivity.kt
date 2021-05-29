@@ -3,12 +3,19 @@ package com.study.app_lifecycler
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    var number = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d("MainActivity", "onCreate");
+
+        btn_button.setOnClickListener {
+            number++;
+            et_text.setText(number.toString())
+        }
     }
 
     override fun onStart() {
