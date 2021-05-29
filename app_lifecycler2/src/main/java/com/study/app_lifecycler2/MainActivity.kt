@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     var number = 0
     var play = false
+    var prePlay = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,6 +49,33 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(prePlay) {
+            play = true;
+            GlobalScope.launch {
+                while (play) {
+                    number++
+                    runOnUiThread {
+                        et_text.setText(number.toString())
+                    }
+                    Thread.sleep(1000)
+                }
+            }
+
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        prePlay = play
+        if(play) {
+            play = false
+        }
+    }
+
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt("number", number)
