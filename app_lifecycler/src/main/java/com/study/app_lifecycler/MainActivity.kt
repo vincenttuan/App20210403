@@ -12,6 +12,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d("MainActivity", "onCreate");
 
+        if(savedInstanceState != null) {
+            number = savedInstanceState.getInt("number", 0)
+            Log.d("MainActivity", "onSaveInstanceState 取得 number = " + number);
+            et_text.setText(number.toString())
+        }
+
         btn_button.setOnClickListener {
             number++;
             et_text.setText(number.toString())
@@ -46,5 +52,11 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("MainActivity", "onDestroy");
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("number", number)
+        Log.d("MainActivity", "onSaveInstanceState 保存了 number = " + number);
+        super.onSaveInstanceState(outState)
     }
 }
