@@ -19,7 +19,7 @@
         android:id="@+id/tv_text"
         android:text="0"
         android:layout_centerInParent="true"
-        android:textSize="100sp"
+        android:textSize="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
