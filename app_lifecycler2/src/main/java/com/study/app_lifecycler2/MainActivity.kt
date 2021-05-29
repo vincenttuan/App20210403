@@ -53,17 +53,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if(prePlay) {
-            play = true;
-            GlobalScope.launch {
-                while (play) {
-                    number++
-                    runOnUiThread {
-                        et_text.setText(number.toString())
-                    }
-                    Thread.sleep(1000)
-                }
-            }
-
+            play = true
+            playGame()
         }
     }
 
